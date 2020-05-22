@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mon Blog{% endblock %}</title>
+
+    {% block stylesheets %}<link rel="stylesheet" href="{{ asset ('css/main.css') }}" >
+    {% endblock %}
+
+</head>
+
+<body>
+<div class ="titre">Welcome to my page
+</div>
+    {# on peut ajouter pleins des blog  #}
+    <nav>
+        <ul>
+            <li>
+                <a href="{{ path ('blog_index') }}">Accueil</a>
+            </li>
+         {% if is_granted ('IS_AUTHENTICATED_REMEMBERED') %}
+            <li>
+                <a href="{{ path ('blog_add') }}">Poster un Article</a>
+            </li>
+         
+            <li>
+                <a href="" >Mon compte</a>
+            </li>
+            <li>
+                <a href="{{ path ('app_logout') }}">Se déconnecter</a>
+            </li>
+           {% else %}
+            <li>
+                <a href="{{ path ('app_login') }}">Se connecter</a>
+            </li>
+            <li>
+                <a href="{{ path ('app_register') }}">S'inscrire</a>
+            
+            </li>
+            {% endif %}
+            </ul>
+            </nav>
+
+
+    {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+</body>
+
+</html>

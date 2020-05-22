@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<div class="alert alert-dismissible alert-warning">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4 class="alert-heading">Warning!</h4>
+  <p class="mb-0"> <a href="#" class="alert-link">Oups, le ressource demandée n'est pas disponible! 
+je vous invite à retourner à l'
+<a href="{{ path ('blog_index') }}">accueil</a>.</p>
+</div>
+
+<p>
+{# Oups, le ressource demandée n'est pas disponible! 
+je vous invite à retourner à l'
+<a href="{{ path ('blog_index') }}">accueil</a>
+</p>
+ #}
+   
+{% endblock %}

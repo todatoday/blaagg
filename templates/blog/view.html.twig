@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{article.title}} - {{parent()}}
+{% endblock %}
+
+{% block body %}
+    {# on remplace le titre par Accueil blog body et title sont des srtes de rempalce 
+    dans la page  #}
+
+        <img src="{{ asset ('uploads/image/' ~ article.image) }}"/> {# ~ permet de concaténer#}
+        <h2>
+            {{article.title}}
+        </h2>
+        <p>
+            {{article.content}} 
+        </p>
+        <em> Par {{article.author.username}} le {{article.submitDate | date('d/m/y H:i:s')}}</em>   
+        {# H:i:s H majuscule c'est 24h et minuscule en 12h en régle générale cette syntax pour afficier l'heure et seconde #}
+       {% if is_granted ('IS_AUTHENTICATED_REMEMBERED') %}
+        <div>
+        {{
+            render (controller ('App\\Controller\\BlogController::comment', {'article' : article} ))
+        }}
+        </div>
+        {% endif %}
+    
+        <h4>Commentaires de l'article :</h4>
+    {% for comment in comments %}
+    <p>
+    {{comment.author.username}}
+    {{comment.content}}
+    </p>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {# <link rel="stylesheet" href="{{ asset ('css/main.css') }}"> #}
+    Accueil -{{parent()}}
+{% endblock %}
+
+{% block body %}
+{# on remplace le titre par Accueil blog body et title sont des srtes de rempalce 
+    dans la page  #}
+
+{% for article in articles %}
+    <h2>
+        <a href="{{path ('blog_view', {'id' : article.id }) }}">{{article.title}}
+        </a>
+        {# : ca veut dire il correspond#}
+    </h2>
+    <p>
+        {{article.content}}
+    </p>
+    <em>
+        Par
+        {{article.author.username}}
+        le
+        {{article.submitDate | date('d/m/y H:i:s')}}</em>
+    {# H:i:s H majuscule c'est 24h et minuscule en 12h en régle générale cette syntax pour afficier l'heure et seconde #}
+    <img height="200px" src="{{ asset ('uploads/image/' ~ article.image)}}"/>
+
+
+    {% if app.user %}
+
+        {% if article.author.username == app.user.username %}
+        <div class="suprimer">
+            <a href="{{ path ('blog_delete', {'id' : article.id}) }}">Supprimer</a>
+        </div>
+        <div class="editer">
+         <a href="{{ path ('blog_edit', {'id' : article.id}) }}">Editer</a>
+        </div>
+    {% endif %}
+{% endif %}
+
+{% endfor %}
+{% endblock %}
+
